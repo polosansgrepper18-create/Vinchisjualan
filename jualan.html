@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#06110b">
+<title>VINCHIS OB55 STORE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#050907;color:#f1fff5;font-family:Arial,sans-serif}
+header{background:#07150c;border-bottom:1px solid #37ff89;padding:17px;text-align:center}
+header h1{margin:0;color:#43ff91;letter-spacing:3px}
+header p{margin:6px 0 0;color:#a9c5b2;font-size:12px}
+.hero{text-align:center;padding:35px 15px;background:radial-gradient(ellipse at top,#17482a,#050907 75%)}
+.hero h2{font-size:30px;margin:8px}
+.green{color:#43ff91}
+.hero p{color:#bad0c0;line-height:1.6}
+.btn{display:inline-block;text-decoration:none;border:0;border-radius:10px;padding:12px 15px;margin:5px;background:#43ff91;color:#041008;font-weight:bold;cursor:pointer}
+.wrap{max-width:1050px;margin:auto;padding:15px}
+.notice{padding:13px;background:#211b0a;border:1px solid #796326;border-radius:10px;color:#ffe6a1;font-size:13px;line-height:1.6}
+h2.section{font-size:23px}
+.search{width:100%;padding:13px;background:#0b1710;color:white;border:1px solid #285b3b;border-radius:10px;margin:8px 0 15px}
+.filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:14px}
+.filters button{white-space:nowrap;padding:9px 12px;border-radius:20px;border:1px solid #285b3b;background:#102219;color:white}
+.filters button.active{background:#43ff91;color:#041008}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{display:flex;flex-direction:column;background:linear-gradient(145deg,#102219,#08110b);border:1px solid #245b39;border-radius:13px;padding:13px;min-width:0}
+.category{color:#43ff91;font-size:10px;font-weight:bold}
+.card h3{font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.price{font-size:19px;color:#a6ffca;font-weight:bold;margin-top:auto}
+.buy{margin-top:12px;padding:11px;background:#43ff91;color:#041008;border:0;border-radius:9px;font-weight:bold}
+footer{text-align:center;color:#a9c5b2;padding:25px;font-size:12px}
+.modal{display:none;position:fixed;inset:0;z-index:10;background:#000d;align-items:center;justify-content:center;padding:12px}
+.modal.show{display:flex}
+.dialog{width:100%;max-width:430px;max-height:95vh;overflow:auto;background:#09150d;border:1px solid #43ff91;border-radius:16px;padding:18px;text-align:center}
+.close{float:right;background:#26372b;color:white;border:0;padding:8px 12px;border-radius:8px}
+.qr{display:block;width:100%;height:auto;max-width:330px;margin:14px auto;border:4px solid white;border-radius:12px}
+.total{background:#102219;padding:13px;border-radius:10px;margin:14px 0;overflow-wrap:anywhere}
+.dialog .btn{width:100%;margin:6px 0}
+.small{font-size:12px;color:#b4cabb;line-height:1.6}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body><header>
+<h1>V!NCH!S</h1>
+<p>⚡ OB55 DIGITAL STORE ⚡</p>
+</header><section class="hero">
+<h2>WELCOME TO <span class="green">VINCHIS</span></h2>
+<p>Katalog produk digital VINCHIS.<br>Pilih produk, cek harga, dan hubungi admin untuk pembelian.</p>
+<a class="btn" href="#katalog">🛒 LIHAT KATALOG</a>
+<a class="btn" href="https://wa.me/6285178361708">💬 WHATSAPP ADMIN</a>
+</section><main class="wrap">
+<div class="notice">
+<b>⚠️ INFORMASI PEMBAYARAN</b><br>
+Tekan tombol Beli untuk melihat foto QRIS. Setelah transfer, tekan tombol WhatsApp dan lampirkan screenshot bukti transfer secara manual. Pastikan nominal dan penerima benar sebelum membayar.
+</div><section id="katalog">
+<h2 class="section">⚡ KATALOG VINCHIS OB55</h2>
+<input id="search" class="search" placeholder="🔍 Cari nama produk..." oninput="render()">
+<div id="filters" class="filters"></div>
+<div id="products" class="grid"></div>
+</section><section>
+<h2>📞 HUBUNGI ADMIN</h2>
+<a class="btn" href="https://wa.me/6285178361708">WhatsApp Admin 1</a>
+<a class="btn" href="https://wa.me/6285133899043">WhatsApp Admin 2</a>
+</section>
+</main><footer>© 2026 VINCHIS OB55 STORE<br>Terima kasih sudah berkunjung!</footer><div class="modal" id="modal">
+<div class="dialog">
+<button class="close" onclick="closeModal()">✕</button>
+<h2 class="green">PEMBAYARAN QRIS</h2>
+<p class="small">Periksa nama produk dan harganya sebelum membayar.</p><div class="total">
+<strong id="itemName"></strong><br>
+<span class="price" id="itemPrice"></span>
+</div><!-- FOTO QRIS YANG KAMU KIRIM --><img
+class="qr"
+src="1792073023867.jpg"
+alt="QRIS pembayaran VINCHIS"
+onerror="this.style.display='none';document.getElementById('qrError').style.display='block'"
+
+«»
+
+<p id="qrError" style="display:none;color:#ffd18b">
+Foto QRIS belum ditemukan. Pastikan file 1792073023867.jpg berada satu folder dengan file HTML.
+</p><p class="small">Setelah transfer, klik tombol WhatsApp lalu lampirkan bukti transfer kamu.</p><a id="sendWA" class="btn" target="_blank" rel="noopener">📲 KIRIM BUKTI TF KE WA</a>
+<a class="btn" href="https://wa.me/6285133899043" target="_blank" rel="noopener">ADMIN ALTERNATIF</a>
+<button class="btn" onclick="closeModal()" style="background:#26372b;color:white">TUTUP</button>
+
+</div>
+</div><script>
+const data = [
+["FILE COMBO [VVIP]",[
+["FILE COMBO V1",65000],
+["FILE COMBO V2",87000],
+["FILE COMBO V3",98000]]],
+
+["FILE SETTING [SUPER VIP]",[
+["FILE SETTING MAXXIMUM HEAD V1",20000],
+["FILE SETTING MAXXIMUM HEAD V2",35000],
+["FILE SETTING MAXXIMUM HEAD V3",50000],
+["FILE SETTING MAXXIMUM HEAD V4 - DISKON AWAL RILIS",10000]]],
+
+["AIM LEGIT [VIP]",[
+["AIM LEGIT HEAD V1",10000],
+["AIM LEGIT HEAD V2",20000],
+["AIM LEGIT HEAD V3",30000]]],
+
+["SETTING DATA [BIASA]",[
+["SETTING DATA HS - Paket 1",1000],
+["SETTING DATA HS - Paket 2",2000],
+["SETTING DATA HS - Paket 3",5000],
+["SETTING DATA HS - Paket 4",5000],
+["SETTING DATA HS - Paket 5",5000]]],
+
+["DRAG X!T [VIP]",[
+["DRAG XIT HEAD V1",10000],
+["DRAG XIT HEAD V2",20000],
+["DRAG XIT HEAD V3",30000]]],
+
+["GLOWAL GEPENG [VIP]",[
+["GLOWAL GEPENG FFM ONLY OB55 V1",10000],
+["GLOWAL GEPENG FFM AND FFB ALL SKIN GLOWAL",20000]]],
+
+["REGEDIT HEAD [VIP]",[
+["REGEDIT HEAD 80%",10000],
+["REGEDIT HEAD 87%",17000],
+["REGEDIT HEAD 90%",20000]]],
+
+["AIMBOT [SUPER VVIP]",[
+["AIMBOT YANG DIPAKE MOD MENU DRIEP CLIENT",300000]]],
+
+["PANEL [SUPER VIP]",[
+["PANEL YANG DIPAKE STREMER BESAR, MOBI, PC, LAPTOP",150000]]],
+
+["DRAG HS [VIP]",[
+["DRAG HS 65%",10000],
+["DRAG HS 75%",20000],
+["DRAG HS 85%",30000],
+["DRAG HS 95%",35000]]],
+
+["BADAN HS [VVIP]",[
+["BADAN HS X HOLOGRAM",25000]]],
+
+["LIST FILE ACAK VINCHIS",[
+["DRAG NECK 93% @VINCHIS",10000],
+["DRAG ENTENG @VINCHIS",5000],
+["DRAG HS BLUTAR @VINCHIS",15000],
+["AIMBOT V3 @VINCHIS",15000],
+["FS PFS ELECTRIC @VINCHIS",10000],
+["FS VOLT AIMHEAD @VINCHIS",10000],
+["FS LOYCHIS @VINCHIS",10000],
+["AIM NECK @VINCHIS",10000]]],
+
+["FILE PRIBADI",[
+["FILE PRIBADI V1 - 1 ORANG",10000]]],
+
+["NEBULA TOUCH",[
+["NEBULA TOUCH GACOR PRIBADI VINCHIS HASIL CRACK VINCHIS DAN UNLIMITED",20000]]]
+];
+
+let active = "Semua";
+
+function rupiah(n){
+return new Intl.NumberFormat("id-ID",{
+style:"currency",currency:"IDR",maximumFractionDigits:0
+}).format(n);
+}
+
+function setupFilters(){
+const el=document.getElementById("filters");
+el.innerHTML="";
+["Semua",...data.map(x=>x[0])].forEach(cat=>{
+const b=document.createElement("button");
+b.textContent=cat;
+b.className=cat===active?"active":"";
+b.onclick=()=>{active=cat;setupFilters();render()};
+el.appendChild(b);
+});
+}
+
+function render(){
+const q=document.getElementById("search").value.toLowerCase();
+const el=document.getElementById("products");
+el.innerHTML="";
+let count=0;
+
+data.forEach(([cat,items])=>{
+if(active!=="Semua"&&active!==cat)return;
+items.forEach(([name,price])=>{
+if(!name.toLowerCase().includes(q))return;
+count++;
+
+const card=document.createElement("article");
+card.className="card";
+
+const category=document.createElement("div");
+category.className="category";
+category.textContent=cat;
+
+const title=document.createElement("h3");
+title.textContent=name;
+
+const amount=document.createElement("div");
+amount.className="price";
+amount.textContent=rupiah(price);
+
+const btn=document.createElement("button");
+btn.className="buy";
+btn.textContent="🛒 BELI SEKARANG";
+btn.onclick=()=>buy(name,price);
+
+card.append(category,title,amount,btn);
+el.appendChild(card);
+});
+});
+
+if(!count)el.textContent="Produk tidak ditemukan.";
+}
+
+function buy(name,price){
+document.getElementById("itemName").textContent=name;
+document.getElementById("itemPrice").textContent=rupiah(price);
+
+const msg="Halo Admin VINCHIS, saya ingin membeli "+name+
+" seharga "+rupiah(price)+
+". Mohon informasi pembayaran. Saya akan mengirim bukti transfer setelah pembayaran.";
+
+document.getElementById("sendWA").href=
+"https://wa.me/6285178361708?text="+encodeURIComponent(msg);
+
+document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(){
+document.getElementById("modal").classList.remove("show");
+}
+
+document.getElementById("modal").addEventListener("click",function(e){
+if(e.target===this)closeModal();
+});
+
+document.addEventListener("keydown",function(e){
+if(e.key==="Escape")closeModal();
+});
+
+setupFilters();
+render();
+</script></body>
+</html>
